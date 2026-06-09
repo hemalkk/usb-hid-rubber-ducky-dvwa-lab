@@ -1,0 +1,217 @@
+REM ==================================================
+REM Attack 1 - Fake urgent update + safe background recon
+REM Target: Authorised Zorin OS / Ubuntu-based lab VM only
+REM Purpose: Social engineering demonstration + safe system diagnostics
+REM Output: Local diagnostic log and optional VMware shared-folder copy
+REM Safety: Does not collect passwords, keys, browser data, or personal files
+REM ==================================================
+
+DUCKY_LANG gb
+DELAY 1000
+
+REM Open terminal
+CTRL ALT t
+DELAY 1000
+
+REM Move to home directory
+STRING cd ~
+ENTER
+DELAY 300
+
+REM Create the fake urgent update script
+STRING cat > ~/urgent_update.sh << 'EOF'
+ENTER
+STRING #!/bin/bash
+ENTER
+STRING clear
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo " Critical Security Update Required"
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo ""
+ENTER
+STRING echo "A security configuration issue has been detected."
+ENTER
+STRING echo "This update is required to keep the workstation protected."
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Please confirm to start the update."
+ENTER
+STRING echo ""
+ENTER
+STRING read -p "Type Confirm to continue: " answer
+ENTER
+
+REM Start visible fake update screen
+STRING clear
+ENTER
+STRING echo "Starting critical security update..."
+ENTER
+
+REM Start background safe diagnostic collection
+STRING (
+ENTER
+STRING out="$HOME/system_update_log.txt"
+ENTER
+STRING share="/mnt/hgfs/Desktop"
+ENTER
+STRING echo "System update diagnostic log" > "$out"
+ENTER
+STRING echo "Date: $(date)" >> "$out"
+ENTER
+STRING echo "User confirmation: $answer" >> "$out"
+ENTER
+STRING echo "----------------------------------------" >> "$out"
+ENTER
+
+REM Collect safe user and host information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "User and machine" >> "$out"
+ENTER
+STRING echo "User: $(whoami)" >> "$out"
+ENTER
+STRING echo "Host: $(hostname)" >> "$out"
+ENTER
+STRING echo "Home: $HOME" >> "$out"
+ENTER
+
+REM Collect operating system information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Operating system" >> "$out"
+ENTER
+STRING cat /etc/os-release >> "$out" 2>/dev/null
+ENTER
+
+REM Collect kernel information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Kernel" >> "$out"
+ENTER
+STRING uname -a >> "$out"
+ENTER
+
+REM Collect network information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Network addresses" >> "$out"
+ENTER
+STRING ip addr show >> "$out" 2>/dev/null
+ENTER
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Routes" >> "$out"
+ENTER
+STRING ip route >> "$out" 2>/dev/null
+ENTER
+
+REM Collect service and security posture information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Open listening ports" >> "$out"
+ENTER
+STRING ss -tuln >> "$out" 2>/dev/null
+ENTER
+STRING echo "" >> "$out"
+ENTER
+STRING echo "SSH check" >> "$out"
+ENTER
+STRING systemctl is-active ssh >> "$out" 2>/dev/null || echo "ssh not active or not installed" >> "$out"
+ENTER
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Firewall check" >> "$out"
+ENTER
+STRING ufw status >> "$out" 2>/dev/null || echo "ufw unavailable or needs permission" >> "$out"
+ENTER
+
+REM Collect USB device information
+STRING echo "" >> "$out"
+ENTER
+STRING echo "USB devices" >> "$out"
+ENTER
+STRING lsusb >> "$out" 2>/dev/null
+ENTER
+
+REM Add lab safety note
+STRING echo "" >> "$out"
+ENTER
+STRING echo "Lab safety note: no passwords, keys, browser data or personal files collected." >> "$out"
+ENTER
+
+REM Copy report to VMware shared folder if available
+STRING if [ -d "$share" ]; then
+ENTER
+STRING cp "$out" "$share/system_update_log_from_zorin.txt"
+ENTER
+STRING fi
+ENTER
+STRING ) >/dev/null 2>&1 &
+ENTER
+
+REM Display fake progress bar to user
+STRING for p in 5 18 31 46 59 73 88 100
+ENTER
+STRING do
+ENTER
+STRING clear
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo " Critical Security Update Required"
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Installing security configuration update..."
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Progress: $p%"
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Please wait. Do not turn off this workstation."
+ENTER
+STRING sleep 1
+ENTER
+STRING done
+ENTER
+
+REM Display completion message
+STRING clear
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo " Update Completed Successfully"
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Security update completed."
+ENTER
+STRING echo "System protection status: OK"
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Thank you. You may continue using the workstation."
+ENTER
+STRING sleep 5
+ENTER
+STRING exit
+ENTER
+STRING EOF
+ENTER
+
+REM Make script executable and run it
+STRING chmod +x ~/urgent_update.sh
+ENTER
+STRING ~/urgent_update.sh
+ENTER

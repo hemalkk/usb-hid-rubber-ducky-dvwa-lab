@@ -1,0 +1,214 @@
+REM ==================================================
+REM Attack 2 - HID-assisted DVWA weaponisation simulation
+REM Target: Authorised Zorin OS / Ubuntu-based lab VM with DVWA installed
+REM Purpose: Safe weaponisation-stage demonstration after Attack 1 recon
+REM Output: Local report and harmless marker file
+REM Safety: No malware, persistence, credential theft, SQL injection, or exfiltration
+REM ==================================================
+
+DUCKY_LANG gb
+DELAY 2000
+
+REM Open terminal
+CTRL ALT t
+DELAY 2000
+
+REM Move to home directory
+STRING cd ~
+ENTER
+DELAY 300
+
+REM Create the DVWA weaponisation simulation script
+STRING cat > ~/dvwa_weaponisation_stage.sh << 'EOF'
+ENTER
+STRING #!/bin/bash
+ENTER
+
+REM Set variables
+STRING clear
+ENTER
+STRING lab="$HOME/ducky_attack2_dvwa_weaponisation"
+ENTER
+STRING share="/mnt/hgfs/Desktop"
+ENTER
+STRING mkdir -p "$lab"
+ENTER
+STRING report="$lab/attack2_dvwa_weaponisation_report.txt"
+ENTER
+STRING payload="$lab/simulated_dvwa_payload_marker.txt"
+ENTER
+STRING dvwa_url="http://127.0.0.1/dvwa/"
+ENTER
+
+REM Create main report
+STRING echo "Attack 2 - HID-assisted DVWA Weaponisation Simulation" > "$report"
+ENTER
+STRING echo "This stage follows Attack 1, where recon and social engineering were already completed." >> "$report"
+ENTER
+STRING echo "No additional host recon is collected in this attack." >> "$report"
+ENTER
+STRING echo "No malware, persistence, credential theft, destructive action, or real exfiltration is performed." >> "$report"
+ENTER
+STRING echo "--------------------------------------------------" >> "$report"
+ENTER
+STRING echo "Date: $(date)" >> "$report"
+ENTER
+
+REM Add attack objective
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Attack objective:" >> "$report"
+ENTER
+STRING echo "Demonstrate how a USB HID device could safely stage a weaponisation step against a known DVWA lab target." >> "$report"
+ENTER
+STRING echo "DVWA is intentionally used as a local vulnerable training application." >> "$report"
+ENTER
+
+REM Add MITRE mapping
+STRING echo "" >> "$report"
+ENTER
+STRING echo "MITRE ATT&CK Mapping:" >> "$report"
+ENTER
+STRING echo "T1200 - Hardware Additions: Raspberry Pi Pico acts as a USB HID keyboard." >> "$report"
+ENTER
+STRING echo "T1059.004 - Unix Shell: commands are executed through the Linux terminal." >> "$report"
+ENTER
+STRING echo "Weaponisation simulation: a harmless payload marker is created locally." >> "$report"
+ENTER
+STRING echo "Target validation: DVWA reachability is checked without exploitation." >> "$report"
+ENTER
+
+REM Create harmless simulated DVWA payload marker
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Simulated DVWA payload marker" > "$payload"
+ENTER
+STRING echo "Purpose: represent a staged web-attack payload without performing a real exploit." >> "$payload"
+ENTER
+STRING echo "Target context: DVWA on local Zorin OS lab machine." >> "$payload"
+ENTER
+STRING echo "This is not malware." >> "$payload"
+ENTER
+STRING echo "No persistence, no command and control, no credential access, no SQL injection, and no data theft." >> "$payload"
+ENTER
+STRING echo "Created: $(date)" >> "$payload"
+ENTER
+
+REM Record payload marker location
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Created harmless simulated payload file:" >> "$report"
+ENTER
+STRING echo "$payload" >> "$report"
+ENTER
+
+REM Validate DVWA target reachability safely
+STRING echo "" >> "$report"
+ENTER
+STRING echo "DVWA target validation:" >> "$report"
+ENTER
+STRING echo "Checking whether DVWA is reachable at: $dvwa_url" >> "$report"
+ENTER
+STRING curl -I "$dvwa_url" >> "$report" 2>/dev/null || echo "DVWA not reachable from localhost." >> "$report"
+ENTER
+
+REM Send harmless web request to DVWA
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Safe web-request simulation:" >> "$report"
+ENTER
+STRING echo "A harmless HTTP request is sent to DVWA to prove the target application is reachable." >> "$report"
+ENTER
+STRING curl -s "$dvwa_url" >/dev/null 2>&1 && echo "Harmless DVWA request completed successfully." >> "$report" || echo "Harmless DVWA request failed." >> "$report"
+ENTER
+
+REM Add impact discussion
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Impact discussion:" >> "$report"
+ENTER
+STRING echo "A real attacker could use HID access to prepare a web exploit, deliver commands, or stage tools after recon." >> "$report"
+ENTER
+STRING echo "This lab safely represents that stage using a text marker and harmless DVWA reachability check." >> "$report"
+ENTER
+
+REM Add mitigations
+STRING echo "" >> "$report"
+ENTER
+STRING echo "Recommended mitigations:" >> "$report"
+ENTER
+STRING echo "1. Block or approve-list unknown USB HID devices." >> "$report"
+ENTER
+STRING echo "2. Lock workstations when unattended." >> "$report"
+ENTER
+STRING echo "3. Monitor rapid terminal launch and automated keystroke behaviour." >> "$report"
+ENTER
+STRING echo "4. Use least privilege to reduce the effect of terminal-based commands." >> "$report"
+ENTER
+STRING echo "5. Keep DVWA or deliberately vulnerable apps isolated from real systems." >> "$report"
+ENTER
+STRING echo "6. Do not run vulnerable training applications on production machines." >> "$report"
+ENTER
+STRING echo "7. Train users to report unexpected update prompts, terminals, or USB devices." >> "$report"
+ENTER
+
+REM Copy report and marker file to VMware shared folder if available
+STRING if [ -d "$share" ]; then
+ENTER
+STRING cp "$report" "$share/attack2_dvwa_weaponisation_report_from_zorin.txt"
+ENTER
+STRING cp "$payload" "$share/attack2_simulated_dvwa_payload_from_zorin.txt"
+ENTER
+STRING fi
+ENTER
+
+REM Display fake maintenance progress
+STRING clear
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo " Security Maintenance Package"
+ENTER
+STRING echo "=================================================="
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Installing local web security maintenance package..."
+ENTER
+STRING echo ""
+ENTER
+STRING for p in 8 21 36 49 63 77 90 100
+ENTER
+STRING do
+ENTER
+STRING echo "Progress: $p%"
+ENTER
+STRING sleep 1
+ENTER
+STRING done
+ENTER
+
+REM Display completion message
+STRING echo ""
+ENTER
+STRING echo "Maintenance completed successfully."
+ENTER
+STRING echo "System protection status: OK"
+ENTER
+STRING echo ""
+ENTER
+STRING echo "Log files have been saved."
+ENTER
+STRING sleep 4
+ENTER
+STRING exit
+ENTER
+STRING EOF
+ENTER
+
+REM Make script executable and run it
+STRING chmod +x ~/dvwa_weaponisation_stage.sh
+ENTER
+DELAY 300
+STRING ~/dvwa_weaponisation_stage.sh
+ENTER
