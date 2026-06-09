@@ -161,22 +161,6 @@ Organisations can reduce risk by applying:
 
 ---
 
-## How to Use This Repository
-
-1. Read `docs/ethical-notice.md`.
-2. Set up the Pico-Ducky environment using `docs/setup-guide.md`.
-3. Review each payload in the `payloads/` folder.
-4. Copy only one payload at a time to the Pico as `payload.dd`.
-5. Run only inside an authorised VM lab.
-6. Take screenshots and place them in `evidence/screenshots/`.
-7. Use `docs/detection-and-mitigation.md` for portfolio explanation.
-
----
-
-## CV Description
-
-**USB HID / Rubber Ducky Security Simulation Lab** — Developed two safe USB HID lab simulations using DuckyScript and Bash: a fake update with safe system reconnaissance and a DVWA weaponisation-stage simulation. Mapped activity to MITRE ATT&CK T1200 and T1059.004, documented detection indicators, and proposed mitigations including USB allow-listing, endpoint monitoring, least privilege, and user awareness.
-
 ---
 
 ## Disclaimer
