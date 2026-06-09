@@ -20,7 +20,6 @@ This project is designed for an authorised educational lab only. It does **not**
 usb-hid-rubber-ducky-dvwa-lab/
 │
 ├── README.md
-├── .gitignore
 │
 ├── payloads/
 │   ├── attack_01_fake_update_safe_recon.ducky
