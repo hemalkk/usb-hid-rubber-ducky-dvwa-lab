@@ -20,25 +20,13 @@ This project is designed for an authorised educational lab only. It does **not**
 usb-hid-rubber-ducky-dvwa-lab/
 │
 ├── README.md
-│
-├── payloads/
-│   ├── attack_01_fake_update_safe_recon.ducky
-│   └── attack_02_dvwa_weaponisation_simulation.ducky
-│
-├── docs/
-│   ├── ethical-notice.md
-│   ├── setup-guide.md
-│   ├── attack-methodology.md
-│   ├── detection-and-mitigation.md
-│   ├── github-upload-guide.md
-│   └── cv-description.md
-│
-├── evidence/
-│   └── screenshots/
-│       └── README.md
-│
-└── references/
-    └── references.md
+├── attack_01_fake_update_safe_recon.ducky
+├── attack_02_dvwa_weaponisation_simulation.ducky
+├── ethical-notice.md
+├── setup-guide.md
+├── attack-methodology.md
+├── detection-and-mitigation.md
+├──references.md
 ```
 
 ---
